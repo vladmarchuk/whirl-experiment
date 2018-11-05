@@ -26,8 +26,8 @@ export default {
         this.$window = $(window);
 
         this.$container = $("#jsi-particle-container");
-        this.width = this.$container.width();
-        this.height = this.$container.height();
+        this.width = this.$container.width() - 20;
+        this.height = this.$container.height() - 20;
 
         this.$canvas = $("<canvas />")
           .attr({ width: this.width, height: this.height })
@@ -57,7 +57,7 @@ export default {
       },
       bindEvent: function() {
         this.$container.on("click", this.setupFigure);
-        this.$container.on("mousemove", this.changeAngle);
+        // this.$container.on("mousemove", this.changeAngle);
       },
       changeAngle: function(event) {
         var offset = this.$container.offset(),
@@ -73,6 +73,7 @@ export default {
         for (var i = 0, length = this.particles.length; i < length; i++) {
           this.particles[i].setAxis(this.strategies[this.strategyIndex]());
         }
+        console.log(this.strategyIndex);
         if (++this.strategyIndex == this.strategies.length) {
           this.strategyIndex = 0;
         }
